@@ -1,0 +1,2 @@
+rootProject.name = "Zumerbot"
+include ':app'

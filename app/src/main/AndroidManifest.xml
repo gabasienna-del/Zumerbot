@@ -1,0 +1,9 @@
+<manifest package="com.gaba.zumerbot"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:label="Zumer Bot"
+        android:allowBackup="true">
+    </application>
+
+</manifest>

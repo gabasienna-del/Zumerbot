@@ -2,37 +2,32 @@ name: Build APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-24.04
 
     steps:
-      # 1. Клонируем репозиторий
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Настраиваем JDK
-      - name: Setup Java
+      - name: Set up Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
-          cache: gradle
 
-      # 3. Делаем gradlew исполняемым
-      - name: Make gradlew executable
+      - name: Make Gradle wrapper executable
         run: chmod +x gradlew
 
-      # 4. Собираем debug APK
-      - name: Build Debug APK
+      - name: Assemble Debug APK
         run: ./gradlew assembleDebug
 
-      # 5. Загружаем APK как артефакт
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: debug-apk
+          path: app/build/outputs/apk/debug/*.apk
